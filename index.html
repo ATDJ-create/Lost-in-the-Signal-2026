@@ -1,167 +1,149 @@
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
-
-  <title>Lost in the Signal</title>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lost in the Signal | GPS Experiment</title>
   <link rel="stylesheet" href="style.css">
+  <script src="gps-engine.js" defer></script>
+  <script src="satellite-simulator.js" defer></script>
+  <script src="signal-errors.js" defer></script>
+  <script src="navigation.js" defer></script>
   <script src="script.js" defer></script>
 </head>
-
 <body>
-
-  <!-- Website header -->
-  <header>
-    <h1>Lost in the Signal</h1>
-
-    <p>
-      Your phone knows where you are.
-      But how does it know?
-    </p>
+  <header class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow">A YEAR 10 STEM EXPERIMENT</p>
+      <h1>Lost in the Signal</h1>
+      <p class="tagline">Your phone knows where you are. But how does it know?</p>
+      <a class="button hero-button" href="#experiments">Start Exploring</a>
+    </div>
   </header>
 
   <main>
-
-    <!-- Introduction -->
-    <section class="intro">
-
-      <h2>The Mystery Behind GPS</h2>
-
-      <p>
-        We use GPS almost every day, whether we're
-        finding directions, tracking a delivery or
-        travelling somewhere new. But have you ever
-        wondered how it actually works?
-      </p>
-
-      <p>
-        GPS uses signals from satellites orbiting
-        Earth to help calculate our location.
-        However, these signals aren't always perfect.
-      </p>
-
-      <p>
-        We created Lost in the Signal to explore
-        how GPS works, why it sometimes makes
-        mistakes, and how those mistakes can
-        affect navigation.
-      </p>
-
-      <button id="startButton">
-        Start Exploring
-      </button>
-
-      <p id="message" aria-live="polite"></p>
-
+    <section class="intro panel">
+      <p class="eyebrow dark">THE MYSTERY BEHIND GPS</p>
+      <h2>How can satellites find us?</h2>
+      <p>We use GPS almost every day, whether we're finding directions, tracking a delivery or travelling somewhere new. But have you ever wondered how it actually works?</p>
+      <p>GPS uses signals from satellites orbiting Earth to help calculate our location. However, these signals aren't always perfect.</p>
+      <p>We created <strong>Lost in the Signal</strong> to explore how GPS works, why it sometimes makes mistakes, and how those mistakes can affect navigation.</p>
     </section>
 
-    <!-- Three experiment cards -->
     <section class="experiments" id="experiments">
-
+      <p class="eyebrow dark">TRY IT YOURSELF</p>
       <h2>Choose an Experiment</h2>
-
-      <p>
-        GPS is more complicated than it looks.
-        Try these experiments to discover why.
-      </p>
-
+      <p>GPS is more complicated than it looks. Start with the satellites, then explore what can go wrong.</p>
       <div class="card-container">
-
-        <!-- Experiment 1 -->
-        <article class="card">
-
-          <h3>01. Find My Location</h3>
-
-          <p>
-            How can satellites work together
-            to calculate your position?
-          </p>
-
-          <button class="experiment-button"
-                  data-experiment="satellites">
-            Explore Satellites
-          </button>
-
+        <article class="card featured">
+          <span class="card-number">01 / AVAILABLE NOW</span>
+          <h3>Find My Location</h3>
+          <p>Switch on satellites and see how distance measurements help locate a receiver.</p>
+          <a class="button" href="#satellite-lab">Explore Satellites</a>
         </article>
-
-        <!-- Experiment 2 -->
         <article class="card">
-
-          <h3>02. Break the Signal</h3>
-
-          <p>
-            What happens when GPS signals
-            arrive slightly too late?
-          </p>
-
-          <button class="experiment-button"
-                  data-experiment="signals">
-            Test Signal Errors
-          </button>
-
+          <span class="card-number">02 / AVAILABLE NOW</span>
+          <h3>Break the Signal</h3>
+          <p>What happens when GPS signals arrive slightly too late?</p>
+          <a class="button" href="#signal-lab">Test Signal Errors</a>
         </article>
-
-        <!-- Experiment 3 -->
         <article class="card">
-
-          <h3>03. Navigate the City</h3>
-
-          <p>
-            How does your phone decide
-            which route you should take?
-          </p>
-
-          <button class="experiment-button"
-                  data-experiment="navigation">
-            Explore Navigation
-          </button>
-
+          <span class="card-number">03 / COMING NEXT</span>
+          <h3>Navigate the City</h3>
+          <p>How does your phone decide which route you should take?</p>
+          <button type="button" class="experiment-button" data-experiment="navigation">Explore Navigation</button>
         </article>
-
       </div>
-
-      <p id="experimentMessage" aria-live="polite"></p>
-
+      <p id="experimentMessage" class="notice" aria-live="polite"></p>
     </section>
 
-    <!-- About the project -->
-    <section class="about">
+    <section class="lab panel" id="satellite-lab">
+      <div class="lab-heading">
+        <div>
+          <p class="eyebrow dark">EXPERIMENT 01</p>
+          <h2>Find My Location</h2>
+          <p>Imagine a receiver somewhere on this map. Each satellite tells us how far away it is. Can we work out where the receiver is hiding?</p>
+        </div>
+        <div class="counter"><strong id="satelliteCount">0 / 4</strong><span>satellites active</span></div>
+      </div>
+      <div class="lab-grid">
+        <div class="map-panel">
+          <svg id="gpsMap" viewBox="0 0 500 360" role="img" aria-label="A two-dimensional map showing satellites, distance circles and a receiver position">
+            <defs>
+              <pattern id="mapGrid" width="25" height="25" patternUnits="userSpaceOnUse">
+                <path d="M 25 0 L 0 0 0 25" fill="none" stroke="#d9e6e2" stroke-width="1"/>
+              </pattern>
+            </defs>
+            <rect width="500" height="360" fill="#edf4f1" rx="12"/>
+            <rect width="500" height="360" fill="url(#mapGrid)" rx="12"/>
+            <g id="rangeLayer"></g>
+            <g id="satelliteLayer"></g>
+            <g id="receiverLayer"></g>
+          </svg>
+          <div class="legend"><span><i class="dot satellite-dot"></i> Satellite</span><span><i class="dot range-dot"></i> Distance circle</span><span><i class="dot receiver-dot"></i> Receiver</span></div>
+          <p class="map-caption">A simplified flat map. The satellites are drawn around the map for learning, not at their real orbital distances.</p>
+        </div>
+        <div class="controls">
+          <h3>Activate satellites</h3>
+          <p class="small">Turn them on one at a time and watch the circles appear.</p>
+          <div id="satelliteControls" class="satellite-controls"></div>
+          <button type="button" id="resetButton" class="reset-button">Reset experiment</button>
+          <div class="result-box" aria-live="polite">
+            <p class="result-label">WHAT HAVE WE LEARNED?</p>
+            <h3 id="resultTitle">Start with one satellite</h3>
+            <p id="resultText">One distance measurement tells us the receiver could be anywhere on a circle.</p>
+            <p id="coordinateText" class="coordinates"></p>
+          </div>
+        </div>
+      </div>
+      <div class="science-note">
+        <h3>Why do real GPS systems normally need four satellites?</h3>
+        <p>Our map is a <strong>2D classroom model</strong>: with three suitable distance measurements, we can locate a point on a flat map. Real GPS must find <strong>latitude, longitude, altitude and correct the receiver's clock error</strong>. That means four unknown values, so at least four suitable satellite measurements are normally required.</p>
+        <p>In this experiment, the distances are assumed to be exact. In the next experiment, we'll investigate what happens when signals are delayed.</p>
+      </div>
+    </section>
 
+
+    <section class="lab panel" id="signal-lab">
+      <p class="eyebrow dark">EXPERIMENT 02</p>
+      <h2>Break the Signal</h2>
+      <p>Even a tiny delay matters when a signal travels at the speed of light. Move the slider to add a delay to Satellite A's measurement. The circles no longer meet neatly, and our estimated position moves.</p>
+      <div class="lab-grid">
+        <div class="map-panel">
+          <svg id="errorMap" viewBox="0 0 500 360" role="img" aria-label="Map of GPS measurement circles and the position estimated from delayed signals">
+            <rect width="500" height="360" rx="12" fill="#edf4f1"/>
+            <g id="errorRangeLayer"></g>
+            <g id="errorPointLayer"></g>
+          </svg>
+          <p class="map-caption">This is a 2D teaching model. Only Satellite A has an added delay. The estimate is calculated from all four circles.</p>
+        </div>
+        <div class="controls">
+          <label for="delaySlider"><strong>Extra signal delay</strong></label>
+          <input type="range" id="delaySlider" min="0" max="100" value="0" step="5">
+          <p><strong id="delayValue">0</strong> nanoseconds (ns)</p>
+          <div class="result-box" aria-live="polite">
+            <p class="result-label">WHAT CHANGED?</p>
+            <p id="rangeError">Extra measured distance: 0.0 m</p>
+            <p id="positionError">Position error: 0.0 map units</p>
+            <p id="errorExplanation">At zero extra delay, all four circles meet at the receiver.</p>
+          </div>
+          <button id="clearDelay" class="reset-button" type="button">Clear delay</button>
+        </div>
+      </div>
+      <div class="science-note"><h3>Why does time matter?</h3>
+        <p><strong>Distance = speed × time.</strong> Light travels about 0.30 metres in one nanosecond, so a 100 ns delay adds about 30 metres to one measured distance. That does <em>not</em> necessarily mean the final position is wrong by 30 metres.</p>
+        <p>Our classroom map uses scaled distances so that the error is visible. Real GPS also needs to correct receiver clock error and other effects.</p>
+      </div>
+    </section>
+
+    <section class="about panel">
+      <p class="eyebrow dark">ABOUT OUR PROJECT</p>
       <h2>Why We Built This</h2>
-
-      <p>
-        GPS is something many of us use without
-        thinking about the science behind it.
-      </p>
-
-      <p>
-        As Year 10 students, we wanted to explore
-        how satellites, mathematics and computer
-        technology work together to help people
-        navigate the world.
-      </p>
-
-      <p>
-        Our goal is to make GPS easier to understand
-        through simple, interactive experiments.
-      </p>
-
+      <p>GPS is something many of us use without thinking about the science behind it.</p>
+      <p>As Year 10 students, we wanted to explore how satellites, mathematics and computer technology work together to help people navigate the world.</p>
+      <p>Our goal is to make GPS easier to understand through simple, interactive experiments.</p>
     </section>
-
   </main>
-
-  <!-- Footer -->
-  <footer>
-    <p>
-      Lost in the Signal |
-      Global Virtual Hackathon 2026
-    </p>
-  </footer>
-
+  <footer><p>Lost in the Signal | Global Virtual Hackathon 2026</p></footer>
 </body>
 </html>
