@@ -1,0 +1,167 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <title>Lost in the Signal</title>
+
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+
+  <!-- Website header -->
+  <header>
+    <h1>Lost in the Signal</h1>
+
+    <p>
+      Your phone knows where you are.
+      But how does it know?
+    </p>
+  </header>
+
+  <main>
+
+    <!-- Introduction -->
+    <section class="intro">
+
+      <h2>The Mystery Behind GPS</h2>
+
+      <p>
+        We use GPS almost every day, whether we're
+        finding directions, tracking a delivery or
+        travelling somewhere new. But have you ever
+        wondered how it actually works?
+      </p>
+
+      <p>
+        GPS uses signals from satellites orbiting
+        Earth to help calculate our location.
+        However, these signals aren't always perfect.
+      </p>
+
+      <p>
+        We created Lost in the Signal to explore
+        how GPS works, why it sometimes makes
+        mistakes, and how those mistakes can
+        affect navigation.
+      </p>
+
+      <button id="startButton">
+        Start Exploring
+      </button>
+
+      <p id="message" aria-live="polite"></p>
+
+    </section>
+
+    <!-- Three experiment cards -->
+    <section class="experiments" id="experiments">
+
+      <h2>Choose an Experiment</h2>
+
+      <p>
+        GPS is more complicated than it looks.
+        Try these experiments to discover why.
+      </p>
+
+      <div class="card-container">
+
+        <!-- Experiment 1 -->
+        <article class="card">
+
+          <h3>01. Find My Location</h3>
+
+          <p>
+            How can satellites work together
+            to calculate your position?
+          </p>
+
+          <button class="experiment-button"
+                  data-experiment="satellites">
+            Explore Satellites
+          </button>
+
+        </article>
+
+        <!-- Experiment 2 -->
+        <article class="card">
+
+          <h3>02. Break the Signal</h3>
+
+          <p>
+            What happens when GPS signals
+            arrive slightly too late?
+          </p>
+
+          <button class="experiment-button"
+                  data-experiment="signals">
+            Test Signal Errors
+          </button>
+
+        </article>
+
+        <!-- Experiment 3 -->
+        <article class="card">
+
+          <h3>03. Navigate the City</h3>
+
+          <p>
+            How does your phone decide
+            which route you should take?
+          </p>
+
+          <button class="experiment-button"
+                  data-experiment="navigation">
+            Explore Navigation
+          </button>
+
+        </article>
+
+      </div>
+
+      <p id="experimentMessage" aria-live="polite"></p>
+
+    </section>
+
+    <!-- About the project -->
+    <section class="about">
+
+      <h2>Why We Built This</h2>
+
+      <p>
+        GPS is something many of us use without
+        thinking about the science behind it.
+      </p>
+
+      <p>
+        As Year 10 students, we wanted to explore
+        how satellites, mathematics and computer
+        technology work together to help people
+        navigate the world.
+      </p>
+
+      <p>
+        Our goal is to make GPS easier to understand
+        through simple, interactive experiments.
+      </p>
+
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>
+      Lost in the Signal |
+      Global Virtual Hackathon 2026
+    </p>
+  </footer>
+
+</body>
+</html>
