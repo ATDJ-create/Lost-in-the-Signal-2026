@@ -98,3 +98,6 @@ body{font-family:Inter,Arial,sans-serif;background:var(--cream)}h1,h2,h3,.brand{
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 
 .feature-image{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:12px;margin-bottom:18px}
+
+/* Photographic experiment-card previews; does not affect experiment pages */
+.experiment-cards .feature-image { width:100%; aspect-ratio:16/10; object-fit:cover; display:block; border-radius:12px; background:#102536; }
