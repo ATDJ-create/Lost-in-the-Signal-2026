@@ -1,3 +1,9 @@
+// SVG helper used by the signal-error diagram.
+function svgElement(tag, attributes, parent) {
+  const el=document.createElementNS("http://www.w3.org/2000/svg",tag);
+  for(const [key,value] of Object.entries(attributes)) el.setAttribute(key,value);
+  parent.appendChild(el); return el;
+}
 // Experiment 2: one delayed signal changes the best-fit position.
 const delaySlider=document.getElementById("delaySlider");
 const delayValue=document.getElementById("delayValue");
