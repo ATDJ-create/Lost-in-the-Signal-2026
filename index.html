@@ -48,10 +48,10 @@
           <a class="button" href="#signal-lab">Test Signal Errors</a>
         </article>
         <article class="card">
-          <span class="card-number">03 / COMING NEXT</span>
+          <span class="card-number">03 / AVAILABLE NOW</span>
           <h3>Navigate the City</h3>
           <p>How does your phone decide which route you should take?</p>
-          <button type="button" class="experiment-button" data-experiment="navigation">Explore Navigation</button>
+          <a class="button" href="#navigation-lab">Explore Navigation</a>
         </article>
       </div>
       <p id="experimentMessage" class="notice" aria-live="polite"></p>
@@ -136,12 +136,50 @@
       </div>
     </section>
 
+
+    <section class="lab panel" id="navigation-lab">
+      <p class="eyebrow dark">EXPERIMENT 03</p>
+      <h2>Navigate the City</h2>
+      <p>Choose a destination and watch our route-finding program search a small street grid. Try East Market with the central road open, then close it to see a genuine detour.</p>
+      <div class="lab-grid">
+        <div class="map-panel">
+          <svg id="cityMap" viewBox="0 0 500 380" role="img" aria-label="City grid with roads, closed streets, a starting point, destination and calculated route"></svg>
+          <div class="legend"><span><i class="dot satellite-dot"></i> Start</span><span><i class="dot receiver-dot"></i> Destination</span><span><i class="dot range-dot"></i> Route</span></div>
+          <p class="map-caption">A fictional city grid. Each street segment has equal distance; the blue route avoids closed roads.</p>
+        </div>
+        <div class="controls">
+          <h3>Plan a journey</h3>
+          <label for="destination">Destination</label>
+          <select id="destination"><option value="library">Library</option><option value="hospital">Hospital</option><option value="museum">Museum</option><option value="station">Train Station</option><option value="east">East Market (detour challenge)</option></select>
+          <label class="satellite-toggle"><input type="checkbox" id="roadClosure" checked><span>Close the central road</span></label>
+          <button type="button" id="findRoute">Find shortest route</button>
+          <div class="result-box" aria-live="polite">
+            <p class="result-label">YOUR ROUTE</p>
+            <h3 id="routeTitle">Choose your destination</h3>
+            <p id="routeResult">Select a destination and calculate a route.</p><p id="routeComparison" class="coordinates"></p>
+          </div>
+        </div>
+      </div>
+      <div class="science-note"><h3>How does the route finder work?</h3>
+        <p>We use <strong>breadth-first search (BFS)</strong>. It checks roads one step at a time, starting with the nearest junctions. Because every road segment has the same length in this model, the first route found is a shortest available route. Real navigation apps also consider traffic, speed limits and travel times.</p>
+        <p>GPS estimates where you are; a route-finding algorithm decides which roads to take. These are two different jobs working together.</p>
+      </div>
+    </section>
+
+    <section class="about panel" id="learning-check">
+      <p class="eyebrow dark">CHECK YOUR UNDERSTANDING</p>
+      <h2>Three quick GPS questions</h2>
+      <p>Choose an answer after trying each experiment. You can change your answer and try again.</p>
+      <div id="quizQuestions" class="quiz-grid"></div>
+    </section>
+
     <section class="about panel">
       <p class="eyebrow dark">ABOUT OUR PROJECT</p>
       <h2>Why We Built This</h2>
       <p>GPS is something many of us use without thinking about the science behind it.</p>
       <p>As Year 10 students, we wanted to explore how satellites, mathematics and computer technology work together to help people navigate the world.</p>
       <p>Our goal is to make GPS easier to understand through simple, interactive experiments.</p>
+      <p><a href="science.html">Read the science and mathematics behind our experiments</a> · <a href="tests.html">Run the calculation tests</a></p>
     </section>
   </main>
   <footer><p>Lost in the Signal | Global Virtual Hackathon 2026</p></footer>

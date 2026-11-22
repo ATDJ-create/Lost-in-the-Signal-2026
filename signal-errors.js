@@ -15,10 +15,10 @@ function renderSignalError(){
   const error=GPSEngine.distance(estimate,GPSEngine.receiver);
   delayValue.textContent=ns;
   rangeError.textContent=`Extra measured distance: ${extraMetres.toFixed(1)} m`;
-  positionError.textContent=`Position error: ${error.toFixed(1)} map units`;
+  positionError.textContent=`Position error: ${error.toFixed(1)} m (illustrative map scale)`;
   errorExplanation.textContent=ns===0?
     "With no added delay, the circles meet at the true position.":
-    "One satellite now reports a longer distance. Our best-fit location shifts because the measurements disagree.";
+    "One satellite now reports a longer distance. The position error is NOT necessarily equal to the added distance: it depends on satellite geometry and all four measurements.";
   errorRanges.replaceChildren(); errorPoints.replaceChildren();
   GPSEngine.satellites.forEach((s,i)=>{
     svgElement("circle",{cx:s.x,cy:s.y,r:ranges[i],fill:"none",stroke:i===0?"#d6554b":"#d49b3d","stroke-width":"2","stroke-dasharray":"6 5"},errorRanges);
