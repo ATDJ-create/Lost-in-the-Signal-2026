@@ -104,3 +104,12 @@ body{font-family:Inter,Arial,sans-serif;background:var(--cream)}h1,h2,h3,.brand{
 
 /* Experiment selection images (embedded in experiments.html for reliability) */
 .experiment-cards .feature-image { width:100%; aspect-ratio:16/10; object-fit:cover; display:block; border-radius:12px; }
+
+/* Experiment overview: inline SVG icons, no image-file dependency. */
+.experiment-icon{width:100%;height:165px;display:grid;place-items:center;border-radius:12px;margin-bottom:18px;background:radial-gradient(circle at 50% 45%,#1e4c61,#102536 72%);color:#67e0d0;}
+.experiment-icon svg{width:88px;height:88px;filter:drop-shadow(0 0 12px rgba(103,224,208,.2));}
+.experiment-icon--signal{color:#f2ba63;background:radial-gradient(circle at 50% 45%,#4b3b32,#102536 72%);}
+.experiment-icon--route{color:#67e0d0;background:radial-gradient(circle at 50% 45%,#1e4554,#102536 72%);}
+.feature-card{transition:transform .2s ease,box-shadow .2s ease;}
+.feature-card:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(9,27,44,.1);}
+@media(prefers-reduced-motion:reduce){.feature-card{transition:none}.feature-card:hover{transform:none}}
